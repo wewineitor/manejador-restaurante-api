@@ -1,19 +1,16 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+Route::post('login', 'App\Http\Controllers\AuthController@login');
+Route::post('logout', 'App\Http\Controllers\AuthController@logout');
+Route::post('refresh', 'App\Http\Controllers\AuthController@refresh');
+Route::post('me', 'App\Http\Controllers\AuthController@me');
+Route::post('register', 'App\Http\Controllers\AuthController@register');
+Route::delete("delete/{id}", [AuthController::class, 'delete']);
+Route::get("show", [AuthController::class, 'show']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+/*Route::middleware('jwt.verify')->group(function () {
+    Route::delete("delete/{id}", [AuthController::class, 'delete']);
+});*/
